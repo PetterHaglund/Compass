@@ -11,8 +11,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:src="@drawable/compass"
-        android:layout_marginTop="52dp"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
