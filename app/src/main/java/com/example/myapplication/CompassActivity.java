@@ -6,9 +6,11 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class CompassActivity extends Activity implements SensorEventListener {
 
@@ -23,6 +25,9 @@ public class CompassActivity extends Activity implements SensorEventListener {
     private float[] mR = new float[9];
     private float[] mOrientation = new float[3];
     private float mCurrentDegree = 0f;
+    TextView mTextView;
+    int displayValue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
         mSensorManager.registerListener(this, mMagnetometer, SensorManager.SENSOR_DELAY_GAME);
+        mTextView = (TextView) findViewById(R.id.azimuth);
     }
 
     protected void onPause() {
@@ -85,6 +91,8 @@ public class CompassActivity extends Activity implements SensorEventListener {
 
             mPointer.startAnimation(ra);
             mCurrentDegree = -azimuthInDegress;
+            displayValue = Math.round(azimuthInDegress);
+            mTextView.setText(String.valueOf(displayValue));
         }
 
     }
@@ -94,5 +102,15 @@ public class CompassActivity extends Activity implements SensorEventListener {
         // TODO Auto-generated method stub
 
     }
-
+/*
+    public void swapColor(View view){
+        switch (view.getId()){
+            case R.id.compass:
+                getResources().getColor(R.color.red);
+                android.support.constraint.ConstraintLayout rl = (android.support.constraint.ConstraintLayout)findViewById(R.id.compass);
+                rl.setBackgroundColor(getResources().getColor(R.color.red));
+                break;
+        }
+    }
+*/
 }
